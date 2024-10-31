@@ -1,0 +1,53 @@
+Docker Trusted Registry:
+
+    1  clear
+    2  sudo yum update -y
+    3  sudo yum install docker -y
+    4  clear
+    5  docker --version
+    6  sudo docker images
+    7  sudo systemctl status docker
+    8   sudo systemctl start docker
+    9  sudo systemctl status docker
+   10  clear
+   11  sudo docker images
+   12  docker pull python
+   13  sudo chmod 666 /var/run/docker.sock
+   14  docker pull python
+   15  sudo docker images
+   16  clear
+   17  docker run -d -p 5000:5000 --name dockerregistry registry:latest
+   18  docker ps
+   19  curl -X GET http://172.31.37.183:5000/v2/_catalog
+   20  clear
+   21  docker ps
+   22   docker rm -f baefeac790d6
+   23  docker ps
+   24  mkdir dockerregistry
+   25  cd dockerregistry
+   26  docker run -d -p 5000:5000 --restart=always --name registry -v $(pwd)/docker-registry:/var/lib/registry registry:latest
+   27  docker ps
+   28  docker images
+   29  docker tag python 172.31.37.183:5000/python
+   30  docker images
+   31  clear
+   32  sudo vi /etc/docker/daemon.json
+   33  sudo docker images
+   34  sudo systemctl status docker
+   35  sudo systemctl restart docker
+   36  sudo systemctl status docker
+   37  clear
+   38  docker images
+   39  docker ps
+   40  docker push 172.31.37.183:5000/python
+   41  docker images
+   42  curl -X GET http://172.31.37.183:5000/v2/_catalog
+   43  clear
+   44  docker images
+   45  docker rmi -f ea2ebd905ab2
+   46  docker images
+   47  curl -X GET http://172.31.37.183:5000/v2/_catalog
+   48  sudo docker pull 172.31.37.183:5000/python
+   49  docker images
+
+
